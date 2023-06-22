@@ -41,9 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
     private List<User> getListUsers() {
         List<User> list = new ArrayList<>();
-        list.add(new User(R.drawable.img_1,"リン", "東京"));
+        list.add(new User(R.drawable.img_1,"rin 1", "東京"));
         list.add(new User(R.drawable.img_2,"山下", "東京"));
         list.add(new User(R.drawable.img_3,"マルコ", "東京"));
+        list.add(new User(R.drawable.img_1,"Michle", "東京"));
+        list.add(new User(R.drawable.img_2,"Trang", "東京"));
+        list.add(new User(R.drawable.img_3,"Neko", "東京"));
+        list.add(new User(R.drawable.img_1,"のびた", "東京"));
+        list.add(new User(R.drawable.img_2,"佐藤", "東京"));
+        list.add(new User(R.drawable.img_3,"rin 2", "東京"));
+        list.add(new User(R.drawable.img_2,"Trang", "東京"));
+
 
         return list;
 
@@ -56,6 +64,19 @@ public class MainActivity extends AppCompatActivity {
         searchView= (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                userAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                userAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 

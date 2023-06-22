@@ -3,21 +3,27 @@ package jp.ac.ecc.se.on_project;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder>implements Filterable {
     private List<User>mListUsers;
+    private List<User>mListUsersOld;
 
     public UserAdapter(List<User> mListUsers) {
 
         this.mListUsers = mListUsers;
+        this.mListUsersOld =mListUsers;
     }
 
     @NonNull
@@ -60,4 +66,36 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             tvAddress= itemView.findViewById(R.id.tv_address);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String strSearch = constraint.toString();
+                if(strSearch.isEmpty()){
+                    mListUsers=mListUsersOld;
+                }else{
+                    List<User> list = new ArrayList<>();
+                    for(User user : mListUsersOld){
+                        if(user.getName().toLowerCase().contains(strSearch.toLowerCase())){
+                            list.add(user);
+                        }
+                    }
+                    mListUsers=list;
+                }
+                FilterResults filterResults= new FilterResults();
+                filterResults.values = mListUsers;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mListUsers=(List<User>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 }
