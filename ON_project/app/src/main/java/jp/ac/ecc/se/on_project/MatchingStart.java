@@ -1,6 +1,8 @@
 package jp.ac.ecc.se.on_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -9,11 +11,8 @@ import android.widget.TextView;
 
 public class MatchingStart extends AppCompatActivity {
     private TextView timer;
-    private TextView message;
-    private TextView userid;
-    private TextView username;
     private Button sleepButton;
-    private Button wakeButton;
+    private Button stopButton;
 
     private Handler handler;
     private Runnable runnable;
@@ -26,12 +25,12 @@ public class MatchingStart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_start);
 
-        //timer= findViewById(R.id.timer);
-        message= findViewById(R.id.message);
-        userid= findViewById(R.id.userId);
-        username=findViewById(R.id.userName);
+        timer = findViewById(R.id.timer);
+        TextView message = findViewById(R.id.message);
+        TextView userid = findViewById(R.id.userId);
+        TextView username = findViewById(R.id.userName);
         sleepButton = findViewById(R.id.sleep);
-        wakeButton = findViewById(R.id.wake);
+        stopButton = findViewById(R.id.wake);
 
         handler = new Handler();
         runnable = new Runnable() {
@@ -43,6 +42,7 @@ public class MatchingStart extends AppCompatActivity {
             }
         };
 
+
         sleepButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,13 +50,14 @@ public class MatchingStart extends AppCompatActivity {
             }
         });
 
-        wakeButton.setOnClickListener(new View.OnClickListener() {
+
+        stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                wakeTimer();
+                Intent intent = new Intent(getApplication(), MatchingStart.class);
+                stopTimer();
             }
         });
-
     }
 
     private void sleepTimer() {
@@ -67,11 +68,17 @@ public class MatchingStart extends AppCompatActivity {
         }
     }
 
-    private void wakeTimer() {
+    private void stopTimer() {
         if (isRunning) {
             handler.removeCallbacks(runnable);
             isRunning = false;
         }
+    }
+
+    private void resetTimer() {
+        stopTimer();
+        timeInMillis = 0;
+        updateTimer();
     }
 
     private void updateTimer() {
@@ -82,6 +89,8 @@ public class MatchingStart extends AppCompatActivity {
         String timeFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds);
         timer.setText(timeFormatted);
     }
+
+
 }
 
 
