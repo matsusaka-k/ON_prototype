@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <ImageView
+      android:id="@+id/shoper"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="99dp"
+      android:layout_marginEnd="10dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/shopertxt"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:srcCompat="@tools:sample/avatars" />
+
+  <TextView
+      android:id="@+id/point"
+      android:layout_width="97dp"
+      android:layout_height="27dp"
+      android:layout_marginStart="150dp"
+      android:layout_marginEnd="150dp"
+      android:layout_marginBottom="20dp"
+      android:text="100"
+      android:textAlignment="center"
+      app:layout_constraintBottom_toTopOf="@+id/kagubtn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/shopertxt"
+      app:layout_constraintVertical_bias="0.488" />
+
+  <Button
+      android:id="@+id/kagubtn"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginStart="64dp"
+      android:layout_marginBottom="100dp"
+      android:text="家具"
+      app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <Button
+      android:id="@+id/fukubtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="100dp"
+      android:layout_marginEnd="30dp"
+      android:layout_marginBottom="100dp"
+      android:text="服"
+      app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.865"
+      app:layout_constraintStart_toEndOf="@+id/kagubtn"
+      app:layout_constraintTop_toBottomOf="@+id/point"
+      app:layout_constraintVertical_bias="1.0" />
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="0dp"
+      android:layout_height="279dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="24dp"
+      app:layout_constraintBottom_toTopOf="@+id/kaubtn"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:listitem="@layout/recycler_rw" />
+
+  <Button
+      android:id="@+id/kaubtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="150dp"
+      android:layout_marginEnd="150dp"
+      android:layout_marginBottom="16dp"
+      android:text="買う"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent" />
+
+  <TextView
+      android:id="@+id/shopertxt"
+      android:layout_width="141dp"
+      android:layout_height="24dp"
+      android:layout_marginStart="52dp"
+      android:layout_marginTop="16dp"
+      android:text="いらしゃいませ～"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
